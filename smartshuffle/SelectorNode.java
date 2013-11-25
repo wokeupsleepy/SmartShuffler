@@ -2,6 +2,7 @@ package smartshuffle;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 
 import musiclibrary.SongFile;
 
@@ -12,7 +13,13 @@ public class SelectorNode {
 	//They will specify a category of music to form an ArrayList
 	//The ArrayList is shuffled and the first song is selected, this song is the one that is played
 	
-	ArrayList<SongFile> songPool = new ArrayList<SongFile>();
+	List<SongFile> songPool = new ArrayList<SongFile>();
+	//refer to this: http://www.reddit.com/r/learnprogramming/comments/1ozctz/java_i_have_a_quick_question_about_declaring_and/
+	//may want to use something else that's not ArrayList
+	
+	String nodeName;	
+	boolean useArtist, useGenre, useAlbum, useYearOfCreation; //booleans default to "false", at the start no attributes are used
+	
 	
 	void addSongByGenre(String desiredGenre, SongFile SongTester) {
 		if(desiredGenre.equals(SongTester.getGenre())) {
@@ -28,6 +35,12 @@ public class SelectorNode {
 	
 	void addSongByAlbum(String desiredAlbum, SongFile SongTester) {
 		if(desiredAlbum.equals(SongTester.getAlbumName())) {
+			songPool.add(SongTester);
+		}
+	}
+	
+	void addSongByYearOfCreation(int desiredStartYear, int desiredEndYear, SongFile SongTester) {
+		if(SongTester.getYearCreated() >= desiredStartYear && SongTester.getYearCreated() <= desiredEndYear) {
 			songPool.add(SongTester);
 		}
 	}
